@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
-import requests
-
 from json import loads
 from urllib.parse import quote
+
+import requests
 
 API_URL = "https://quillbot.com/api/singleParaphrase"
 PARAMS = "?userID=N/A&text={}&strength={}&autoflip={}&wikify={}&fthresh={}"
@@ -20,7 +20,8 @@ def setup_session():
     session = requests.Session()
     session.headers.update(
         {
-            "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0",
+            "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:68.0) "
+            "Gecko/20100101 Firefox/68.0",
             "content-type": "application/text",
         }
     )
@@ -72,7 +73,8 @@ def paraphrasor(url, session):
         "_pk_id.2.48cd": "da4e8c5c080bfe6b.1566130403.1.1566130403.1566130403.",
         "_pk_ses.2.48cd": "*",
         "sessID": "fec1e0c7b541d98d",
-        "connect.sid": "s%3AoJCREvXNaX3V1EgJREtU9UbHSlxdBtQB.Zrj0yid9sCeGWgKuO1hjdQraPlZlpkKyNvcj4DIcc9o",
+        "connect.sid": "s%3AoJCREvXNaX3V1EgJREtU9UbHSlxdBtQB."
+        "Zrj0yid9sCeGWgKuO1hjdQraPlZlpkKyNvcj4DIcc9o",
         "userIDToken": "N/A",
         "prioritize": "2",
     }
@@ -85,7 +87,7 @@ def paraphrasor(url, session):
             print(f"\nData Sent: {json_text['sent']}", end)
             paras = [key for key in json_text if key.startswith("paras")]
             texts = list(
-                set([text.get("alt") for para in paras for text in json_text[para]])
+                {text.get("alt") for para in paras for text in json_text[para]}
             )
             print("Alternative Texts:")
             print("-" * 80)
